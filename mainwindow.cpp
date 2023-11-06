@@ -23,7 +23,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
 
-    QPixmap labelImage("/Users/mggirsby/Desktop/Jazz.jpg"); // add filepath to your own image here
+    QPixmap labelImage("/Users/teoip/Desktop/kitty.jpg"); // add filepath to your own image here
     ui->label->setPixmap(labelImage);
     ui->label->setScaledContents(true);
 }
