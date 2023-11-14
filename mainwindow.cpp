@@ -1,19 +1,20 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "QFileDialog"
-
-#include <QImage> // designed and optimized for I/O, and for direct pixel access and manipulation,
-#include <QPixmap> // designed and optimized for showing images on screen.
-#include <QBitmap> // convenience class that inherits QPixmap, ensuring a depth of 1.
-#include <QPicture> // paint device that records and replays QPainter commands.
-
-#include <string>
+#include "imageeditor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    userImage = new ImageEditor(this);
+
+    // Connect the button click to the ImageEditor slot
+    connect(ui->displayButton, SIGNAL(clicked()), userImage, SLOT(addImage()));
+
+    // Connect the updateDisplay signal to a slot that updates the displayed image
+    connect(userImage, SIGNAL(updateDisplay(QImage)), this, SLOT(updateDisplayedImage(QImage)));
 }
 
 MainWindow::~MainWindow()
@@ -21,27 +22,37 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::updateDisplayedImage(const QImage& newImage)
 {
-
-    QPixmap labelImage("/Users/teoip/Desktop/kitty.jpg"); // add filepath to your own image here
-    ui->label->setPixmap(labelImage);
-    ui->label->setScaledContents(true);
+    // Update the QLabel or any other widget that displays the image
+    ui->displayLabel->setPixmap(QPixmap::fromImage(newImage));
+    ui->displayLabel->setScaledContents(true);
 }
 
-
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_displayButton_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
 
                                                     "/home",
 
-                                                    tr("Images (*.png *.xpm *.jpg)"));
+                                                    tr("Images (*.jpg *.gif *.png *.bnp *.tif )"));
+    ;
+    userImage->loadImage(fileName);
+}
 
-    QPixmap labelTest(fileName); // add filepath to your own image here
+void MainWindow::on_noirButton_clicked()
+{
+    userImage->filterNoir();
+}
 
-    ui->label_2->setPixmap(labelTest);
+void MainWindow::on_cwButton_clicked()
+{
+    userImage->rotateClockwise();
+}
 
-    ui->label_2->setScaledContents(true);
+
+void MainWindow::on_ccwButton_clicked()
+{
+    userImage->rotateCounter();
 }
 

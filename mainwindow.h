@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "imageeditor.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,12 +16,18 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
-    void on_pushButton_clicked();
+public slots:
+    void updateDisplayedImage(const QImage& newImage);
 
-    void on_pushButton_2_clicked();
+private slots:
+    void on_displayButton_clicked();
+    void on_noirButton_clicked();
+    void on_cwButton_clicked();
+    void on_ccwButton_clicked();
+    // add buttons here
 
 private:
     Ui::MainWindow *ui;
+    ImageEditor *userImage;
 };
 #endif // MAINWINDOW_H
