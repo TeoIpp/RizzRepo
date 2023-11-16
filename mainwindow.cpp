@@ -56,3 +56,15 @@ void MainWindow::on_ccwButton_clicked()
     userImage->rotateCounter();
 }
 
+
+void MainWindow::on_pushButton_clicked()
+{
+    userImage->undo();
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    userImage->redo();
+}
+

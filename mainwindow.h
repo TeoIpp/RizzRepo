@@ -26,6 +26,10 @@ private slots:
     void on_ccwButton_clicked();
     // add buttons here
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     ImageEditor *userImage;
