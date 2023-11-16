@@ -4,6 +4,8 @@ ImageEditor::ImageEditor(QObject *parent) : QObject(parent) {
     // constructor if needed
 }
 
+
+
 void ImageEditor::loadImage(QString fileName) {
 
     filePath = fileName;
@@ -16,15 +18,38 @@ void ImageEditor::loadImage(QString fileName) {
 
 void ImageEditor::filterNoir(){
 
-    QImage noir = image.convertToFormat(QImage::Format_Grayscale8);
-    image = noir;
 
+    QImage noir = image.convertToFormat(QImage::Format_Grayscale8);
+    editHist.push(image);
+    image = noir;
     emit updateDisplay(image);
 }
+
+void ImageEditor::undo(){
+
+    if (editHist.isEmpty()==false){
+        undoHist.push(image);
+        image = editHist.top();
+        emit updateDisplay(editHist.pop());
+    }
+}
+
+void ImageEditor::redo(){
+
+    if (undoHist.isEmpty()==false){
+        editHist.push(image);
+        image = undoHist.top();
+        emit updateDisplay(undoHist.pop());
+    }
+}
+// + - + - +
+// . + . + .
+// . . - .
 
 void ImageEditor::rotateClockwise() {
 
     QImage rotate = image.transformed(QTransform().rotate(90));
+    editHist.push(image);
     image = rotate;
 
     emit updateDisplay(image);
@@ -33,6 +58,7 @@ void ImageEditor::rotateClockwise() {
 void ImageEditor::rotateCounter() {
 
     QImage rotate = image.transformed(QTransform().rotate(270));
+    editHist.push(image);
     image = rotate;
 
     emit updateDisplay(image);
