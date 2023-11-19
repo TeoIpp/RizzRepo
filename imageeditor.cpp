@@ -21,6 +21,7 @@ void ImageEditor::imgExport(QString dirPath) {
     filePath = dirPath;
 
     image.save(filePath+"\\"+newName+fileType);
+
 }
 
 void ImageEditor::filterNoir(){
