@@ -197,8 +197,86 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionImport_Image"/>
+    <addaction name="actionSave_Image"/>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+   </widget>
+   <widget class="QMenu" name="menuTools_2">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <widget class="QMenu" name="menuRotate">
+     <property name="title">
+      <string>Rotate</string>
+     </property>
+     <addaction name="action"/>
+     <addaction name="action_2"/>
+    </widget>
+    <widget class="QMenu" name="menuFilters">
+     <property name="title">
+      <string>Filters</string>
+     </property>
+     <addaction name="actionBlur"/>
+     <addaction name="actionSepia"/>
+     <addaction name="actionBlur_2"/>
+    </widget>
+    <addaction name="menuRotate"/>
+    <addaction name="menuFilters"/>
+   </widget>
+   <addaction name="menuTools"/>
+   <addaction name="menuTools_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action">
+   <property name="text">
+    <string>--&gt;</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>&lt;--</string>
+   </property>
+  </action>
+  <action name="actionBlur">
+   <property name="text">
+    <string>Noir</string>
+   </property>
+  </action>
+  <action name="actionImport_Image">
+   <property name="text">
+    <string>Import Image</string>
+   </property>
+  </action>
+  <action name="actionSave_Image">
+   <property name="text">
+    <string>Save Image</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionSepia">
+   <property name="text">
+    <string>Sepia</string>
+   </property>
+  </action>
+  <action name="actionBlur_2">
+   <property name="text">
+    <string>Blur</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

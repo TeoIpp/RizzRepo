@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     userImage = new ImageEditor(this);
 
     // Connect the button click to the ImageEditor slot
-    connect(ui->displayButton, SIGNAL(clicked()), userImage, SLOT(addImage()));
+  //  connect(ui->displayButton, SIGNAL(clicked()), userImage, SLOT(addImage()));
 
     // Connect the updateDisplay signal to a slot that updates the displayed image
     connect(userImage, SIGNAL(updateDisplay(QImage)), this, SLOT(updateDisplayedImage(QImage)));
@@ -92,5 +92,45 @@ void MainWindow::on_comboBox_textActivated(const QString &arg1)
 {
     QString type = arg1;
     userImage->setType(type);
+}
+void MainWindow::on_action_triggered()
+{
+    userImage->rotateClockwise();
+}
+
+
+void MainWindow::on_action_2_triggered()
+{
+    userImage->rotateCounter();
+}
+
+
+void MainWindow::on_actionBlur_triggered()
+{
+    userImage->filterNoir();
+}
+
+
+void MainWindow::on_actionImport_Image_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+
+                                                    "/home",
+
+                                                    tr("Images (*.jpg *.gif *.png *.bnp *.tif )"));
+    ;
+    userImage->loadImage(fileName);
+}
+
+
+void MainWindow::on_actionUndo_triggered()
+{
+    userImage->undo();
+}
+
+
+void MainWindow::on_actionRedo_triggered()
+{
+    userImage->redo();
 }
 
