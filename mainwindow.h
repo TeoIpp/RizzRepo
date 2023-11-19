@@ -30,8 +30,21 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_3_clicked();
+
+
+    void on_lineEdit_textEdited(const QString &arg1);
+
+    void on_comboBox_textActivated(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     ImageEditor *userImage;
+
+    void createActions();
+    void createMenus();
+
+    QMenu *exportMenu;
+
 };
 #endif // MAINWINDOW_H

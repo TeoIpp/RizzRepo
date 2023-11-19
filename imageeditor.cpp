@@ -16,6 +16,13 @@ void ImageEditor::loadImage(QString fileName) {
     emit updateDisplay(image); // updates image viewer
 }
 
+void ImageEditor::imgExport(QString dirPath) {
+
+    filePath = dirPath;
+
+    image.save(filePath+"\\"+newName+fileType);
+}
+
 void ImageEditor::filterNoir(){
 
 
@@ -62,4 +69,11 @@ void ImageEditor::rotateCounter() {
     image = rotate;
 
     emit updateDisplay(image);
+}
+
+void ImageEditor::setName(QString name){
+    newName = name;
+}
+void ImageEditor::setType(QString type){
+    fileType = type;
 }

@@ -40,6 +40,15 @@ void MainWindow::on_displayButton_clicked()
     userImage->loadImage(fileName);
 }
 
+void MainWindow::on_pushButton_3_clicked()
+{
+    QString dirPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                        "/home",
+                                                        QFileDialog::ShowDirsOnly
+                                                            | QFileDialog::DontResolveSymlinks);
+    userImage->imgExport(dirPath);
+}
+
 void MainWindow::on_noirButton_clicked()
 {
     userImage->filterNoir();
@@ -66,5 +75,22 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     userImage->redo();
+}
+
+
+
+
+
+void MainWindow::on_lineEdit_textEdited(const QString &arg1)
+{
+    QString name = arg1;
+    userImage->setName(name);
+}
+
+
+void MainWindow::on_comboBox_textActivated(const QString &arg1)
+{
+    QString type = arg1;
+    userImage->setType(type);
 }
 
