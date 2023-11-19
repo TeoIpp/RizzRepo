@@ -13,7 +13,8 @@
 
 #include <string>
 
-
+// TESTING if SSH key will push -Michael
+// Pushing
 
 class ImageEditor : public QObject {
     Q_OBJECT
