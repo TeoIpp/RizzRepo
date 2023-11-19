@@ -30,6 +30,18 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_action_triggered();
+
+    void on_action_2_triggered();
+
+    void on_actionBlur_triggered();
+
+    void on_actionImport_Image_triggered();
+
+    void on_actionUndo_triggered();
+
+    void on_actionRedo_triggered();
+
 private:
     Ui::MainWindow *ui;
     ImageEditor *userImage;

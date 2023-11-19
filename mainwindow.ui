@@ -14,58 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="displayButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>100</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Chose File</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="noirButton">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>10</y>
-      <width>100</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Noir</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cwButton">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>10</y>
-      <width>100</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>--&gt;</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ccwButton">
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>10</y>
-      <width>100</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;--</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="displayLabel">
     <property name="geometry">
      <rect>
@@ -79,32 +27,6 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>10</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Undo</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>30</y>
-      <width>80</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Redo</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -115,8 +37,86 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionImport_Image"/>
+    <addaction name="actionSave_Image"/>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+   </widget>
+   <widget class="QMenu" name="menuTools_2">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <widget class="QMenu" name="menuRotate">
+     <property name="title">
+      <string>Rotate</string>
+     </property>
+     <addaction name="action"/>
+     <addaction name="action_2"/>
+    </widget>
+    <widget class="QMenu" name="menuFilters">
+     <property name="title">
+      <string>Filters</string>
+     </property>
+     <addaction name="actionBlur"/>
+     <addaction name="actionSepia"/>
+     <addaction name="actionBlur_2"/>
+    </widget>
+    <addaction name="menuRotate"/>
+    <addaction name="menuFilters"/>
+   </widget>
+   <addaction name="menuTools"/>
+   <addaction name="menuTools_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action">
+   <property name="text">
+    <string>--&gt;</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>&lt;--</string>
+   </property>
+  </action>
+  <action name="actionBlur">
+   <property name="text">
+    <string>Noir</string>
+   </property>
+  </action>
+  <action name="actionImport_Image">
+   <property name="text">
+    <string>Import Image</string>
+   </property>
+  </action>
+  <action name="actionSave_Image">
+   <property name="text">
+    <string>Save Image</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionSepia">
+   <property name="text">
+    <string>Sepia</string>
+   </property>
+  </action>
+  <action name="actionBlur_2">
+   <property name="text">
+    <string>Blur</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
