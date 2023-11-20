@@ -110,3 +110,56 @@ void MainWindow::on_actionRedo_triggered()
     userImage->redo();
 }
 
+
+void MainWindow::on_actionSepia_triggered()
+{
+
+    userImage->filterSepia();
+
+}
+
+
+void MainWindow::on_actionBlur_2_triggered()
+{
+    userImage->filterBlur();
+}
+
+void MainWindow::saveImageToFile(const QPixmap& pixmap)
+{
+
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Save Image"), "", tr("Images (*.png *.jpg *.bmp *.tiff *.gif)"));
+
+    if (!filePath.isEmpty())
+    {
+        QImage image = pixmap.toImage();
+        QString fileExtension = QFileInfo(filePath).suffix().toLower();
+        if (image.save(filePath, qPrintable(fileExtension)))
+        {
+            QMessageBox::information(this, tr("Success"), tr("Image saved successfully."));
+        }
+        else
+        {
+            QMessageBox::warning(this, tr("Error"), tr("Failed to save image."));
+        }
+    }
+
+}
+
+
+void MainWindow::on_actionSave_Image_triggered()
+{
+    QPixmap pixmap = ui->displayLabel->pixmap();
+
+    if (!pixmap.isNull())
+    {
+        saveImageToFile(pixmap);
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("Error"), tr("No image to save."));
+    }
+}
+
+
+
+

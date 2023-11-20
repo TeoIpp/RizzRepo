@@ -13,6 +13,9 @@
 
 #include <string>
 
+#include "QMessageBox"
+
+
 // TESTING if SSH key will push -Michael
 // Pushing
 
@@ -28,6 +31,8 @@ public slots:
     void rotateCounter();
     void undo();
     void redo();
+    void filterSepia();
+    void filterBlur();
     // add functions here , also add button in mainwindow.h
 signals:
     void updateDisplay(const QImage& newImage);

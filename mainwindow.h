@@ -42,8 +42,17 @@ private slots:
 
     void on_actionRedo_triggered();
 
+    void on_actionSepia_triggered();
+
+    void on_actionBlur_2_triggered();
+
+    void on_actionSave_Image_triggered();
+
+
+
 private:
     Ui::MainWindow *ui;
     ImageEditor *userImage;
+    void saveImageToFile(const QPixmap& pixmap);
 };
 #endif // MAINWINDOW_H
