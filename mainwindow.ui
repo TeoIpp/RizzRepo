@@ -41,10 +41,15 @@
     <property name="title">
      <string>File</string>
     </property>
+    <widget class="QMenu" name="menuSave_Image">
+     <property name="title">
+      <string>Save Image</string>
+     </property>
+     <addaction name="actionSave_as_jpg"/>
+     <addaction name="actionSave_as_png"/>
+    </widget>
     <addaction name="actionImport_Image"/>
-    <addaction name="actionSave_Image"/>
-    <addaction name="actionUndo"/>
-    <addaction name="actionRedo"/>
+    <addaction name="menuSave_Image"/>
    </widget>
    <widget class="QMenu" name="menuTools_2">
     <property name="title">
@@ -68,7 +73,15 @@
     <addaction name="menuRotate"/>
     <addaction name="menuFilters"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+   </widget>
    <addaction name="menuTools"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuTools_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -92,11 +105,6 @@
     <string>Import Image</string>
    </property>
   </action>
-  <action name="actionSave_Image">
-   <property name="text">
-    <string>Save Image</string>
-   </property>
-  </action>
   <action name="actionUndo">
    <property name="text">
     <string>Undo</string>
@@ -115,6 +123,21 @@
   <action name="actionBlur_2">
    <property name="text">
     <string>Blur</string>
+   </property>
+  </action>
+  <action name="actionFile_Type">
+   <property name="text">
+    <string>File Type</string>
+   </property>
+  </action>
+  <action name="actionSave_as_jpg">
+   <property name="text">
+    <string>Save as jpg</string>
+   </property>
+  </action>
+  <action name="actionSave_as_png">
+   <property name="text">
+    <string>Save as png</string>
    </property>
   </action>
  </widget>

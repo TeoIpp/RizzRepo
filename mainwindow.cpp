@@ -98,6 +98,34 @@ void MainWindow::on_actionImport_Image_triggered()
     userImage->loadImage(fileName);
 }
 
+void MainWindow::on_actionSave_as_jpg_triggered()
+{
+    QString imgDir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                        "/home",
+                                                        QFileDialog::ShowDirsOnly
+                                                            | QFileDialog::DontResolveSymlinks);
+    bool ok;
+    QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+                                         tr("File name:"), QLineEdit::Normal,
+                                         QDir::home().dirName(), &ok);
+    QString type = ".jpg";
+    userImage->imgExport(type,imgDir,name);
+}
+void MainWindow::on_actionSave_as_png_triggered()
+{
+    QString imgDir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                       "/home",
+                                                       QFileDialog::ShowDirsOnly
+                                                           | QFileDialog::DontResolveSymlinks);
+    bool ok;
+    QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+                                         tr("File name:"), QLineEdit::Normal,
+                                         QDir::home().dirName(), &ok);
+    QString type = ".png";
+    userImage->imgExport(type,imgDir,name);
+}
+
+
 
 void MainWindow::on_actionUndo_triggered()
 {
@@ -109,4 +137,11 @@ void MainWindow::on_actionRedo_triggered()
 {
     userImage->redo();
 }
+
+
+
+
+
+
+
 

@@ -16,6 +16,11 @@ void ImageEditor::loadImage(QString fileName) {
     emit updateDisplay(image); // updates image viewer
 }
 
+void ImageEditor::imgExport(QString type, QString imgDir, QString name){
+
+    image.save(imgDir+"\\"+name+type);
+}
+
 void ImageEditor::filterNoir(){
 
 

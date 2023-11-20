@@ -7,6 +7,7 @@
 #include <QBitmap> // convenience class that inherits QPixmap, ensuring a depth of 1.
 #include <QPicture> // paint device that records and replays QPainter commands.
 #include <QStack>
+#include <QInputDialog>
 
 #include <QFileDialog>
 #include <QTransform>
@@ -28,6 +29,7 @@ public slots:
     void rotateCounter();
     void undo();
     void redo();
+    void imgExport(QString type, QString imgDir, QString name);
     // add functions here , also add button in mainwindow.h
 signals:
     void updateDisplay(const QImage& newImage);
@@ -35,6 +37,7 @@ private:
     QStack<QImage> editHist;
     QStack<QImage> undoHist;
     QString filePath;
+    QString name;
     QImage image;
 };
 

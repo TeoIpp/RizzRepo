@@ -19,6 +19,7 @@ public:
 public slots:
     void updateDisplayedImage(const QImage& newImage);
 
+
 private slots:
     void on_displayButton_clicked();
     void on_noirButton_clicked();
@@ -41,6 +42,12 @@ private slots:
     void on_actionUndo_triggered();
 
     void on_actionRedo_triggered();
+
+
+
+    void on_actionSave_as_jpg_triggered();
+
+    void on_actionSave_as_png_triggered();
 
 private:
     Ui::MainWindow *ui;
