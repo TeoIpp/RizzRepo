@@ -7,13 +7,14 @@
 #include <QBitmap> // convenience class that inherits QPixmap, ensuring a depth of 1.
 #include <QPicture> // paint device that records and replays QPainter commands.
 #include <QStack>
+#include <QInputDialog>
 
 #include <QFileDialog>
 #include <QTransform>
 
 #include <string>
 
-#include "QMessageBox"
+#include <QMessageBox>
 
 
 // TESTING if SSH key will push -Michael
@@ -33,6 +34,8 @@ public slots:
     void redo();
     void filterSepia();
     void filterBlur();
+
+
     // add functions here , also add button in mainwindow.h
 signals:
     void updateDisplay(const QImage& newImage);

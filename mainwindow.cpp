@@ -26,7 +26,7 @@ void MainWindow::updateDisplayedImage(const QImage& newImage)
 {
     // Update the QLabel or any other widget that displays the image
     ui->displayLabel->setPixmap(QPixmap::fromImage(newImage));
-    ui->displayLabel->setScaledContents(true);
+    ui->displayLabel->setScaledContents(false);
 }
 
 void MainWindow::on_displayButton_clicked()
@@ -38,52 +38,6 @@ void MainWindow::on_displayButton_clicked()
                                                     tr("Images (*.jpg *.gif *.png *.bnp *.tif )"));
     ;
     userImage->loadImage(fileName);
-}
-
-void MainWindow::on_noirButton_clicked()
-{
-    userImage->filterNoir();
-}
-
-void MainWindow::on_cwButton_clicked()
-{
-    userImage->rotateClockwise();
-}
-
-
-void MainWindow::on_ccwButton_clicked()
-{
-    userImage->rotateCounter();
-}
-
-
-void MainWindow::on_pushButton_clicked()
-{
-    userImage->undo();
-}
-
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    userImage->redo();
-}
-
-
-void MainWindow::on_action_triggered()
-{
-    userImage->rotateClockwise();
-}
-
-
-void MainWindow::on_action_2_triggered()
-{
-    userImage->rotateCounter();
-}
-
-
-void MainWindow::on_actionBlur_triggered()
-{
-    userImage->filterNoir();
 }
 
 
@@ -110,6 +64,10 @@ void MainWindow::on_actionRedo_triggered()
     userImage->redo();
 }
 
+void MainWindow::on_actionNoir_triggered()
+{
+    userImage->filterNoir();
+}
 
 void MainWindow::on_actionSepia_triggered()
 {
@@ -118,46 +76,61 @@ void MainWindow::on_actionSepia_triggered()
 
 }
 
-
-void MainWindow::on_actionBlur_2_triggered()
+void MainWindow::on_actionBlur_triggered()
 {
     userImage->filterBlur();
 }
 
-void MainWindow::saveImageToFile(const QPixmap& pixmap)
-{
+void MainWindow::imgSaveToFile(QString type, QString imgDir, QString name){
 
-    QString filePath = QFileDialog::getSaveFileName(this, tr("Save Image"), "", tr("Images (*.png *.jpg *.bmp *.tiff *.gif)"));
-
-    if (!filePath.isEmpty())
+    QPixmap image = ui->displayLabel->pixmap();
+    if (image.save(imgDir+"\\"+name+type))
     {
-        QImage image = pixmap.toImage();
-        QString fileExtension = QFileInfo(filePath).suffix().toLower();
-        if (image.save(filePath, qPrintable(fileExtension)))
-        {
-            QMessageBox::information(this, tr("Success"), tr("Image saved successfully."));
-        }
-        else
-        {
-            QMessageBox::warning(this, tr("Error"), tr("Failed to save image."));
-        }
+        QMessageBox::information(this, tr("Success"), tr("Image saved successfully."));
     }
-
+    else
+    {
+        QMessageBox::warning(this, tr("Error"), tr("Failed to save image."));
+    }
 }
-
-
 void MainWindow::on_actionSave_Image_triggered()
 {
-    QPixmap pixmap = ui->displayLabel->pixmap();
+    QString imgDir;
+    QString name;
+    QString type;
 
-    if (!pixmap.isNull())
+    QPixmap image = ui->displayLabel->pixmap();
+    if (!image.isNull())
     {
-        saveImageToFile(pixmap);
+        imgDir = QFileDialog::getExistingDirectory(this, tr("Select Directory"),
+                                                   "/home",
+                                                   QFileDialog::ShowDirsOnly
+                                                       | QFileDialog::DontResolveSymlinks);
+        bool ok;
+        name = QInputDialog::getText(this, tr("Input File Name"),
+                                     tr("File name:"), QLineEdit::Normal,
+                                     QDir::home().dirName(), &ok);
+
+        QStringList types;
+        types << tr(".jpg") << tr(".png") << tr(".bmp") << tr(".tiff") << tr(".gif");
+        type = QInputDialog::getItem(this, tr("Select File-Type"),
+                                     tr("File-Type: "), types, 0, false, &ok);
+
+        imgSaveToFile(type,imgDir,name);
     }
     else
     {
         QMessageBox::warning(this, tr("Error"), tr("No image to save."));
     }
+}
+
+void MainWindow::on_rotateL_triggered()
+{
+    userImage->rotateCounter();
+}
+void MainWindow::on_rotateR_triggered()
+{
+    userImage->rotateClockwise();
 }
 
 

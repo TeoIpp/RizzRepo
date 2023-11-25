@@ -21,38 +21,25 @@ public slots:
 
 private slots:
     void on_displayButton_clicked();
-    void on_noirButton_clicked();
-    void on_cwButton_clicked();
-    void on_ccwButton_clicked();
     // add buttons here
 
-    void on_pushButton_clicked();
-
-    void on_pushButton_2_clicked();
-
-    void on_action_triggered();
-
-    void on_action_2_triggered();
-
-    void on_actionBlur_triggered();
-
-    void on_actionImport_Image_triggered();
 
     void on_actionUndo_triggered();
-
     void on_actionRedo_triggered();
 
-    void on_actionSepia_triggered();
+    void on_rotateR_triggered();
+    void on_rotateL_triggered();
 
-    void on_actionBlur_2_triggered();
-
+    void on_actionImport_Image_triggered();
     void on_actionSave_Image_triggered();
+    void imgSaveToFile(QString type, QString imgDir, QString name);
 
-
+    void on_actionSepia_triggered();
+    void on_actionBlur_triggered();
+    void on_actionNoir_triggered();
 
 private:
     Ui::MainWindow *ui;
     ImageEditor *userImage;
-    void saveImageToFile(const QPixmap& pixmap);
 };
 #endif // MAINWINDOW_H
