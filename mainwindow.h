@@ -15,14 +15,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void updateDisplayedImage();
 
-public slots:
-    void updateDisplayedImage(const QImage& newImage);
+//public slots:
+    //void updateDisplayedImage(const QImage& newImage);
 
 private slots:
-    void on_displayButton_clicked();
-    // add buttons here
-
+    // add buttons/actions here
 
     void on_actionUndo_triggered();
     void on_actionRedo_triggered();
@@ -38,6 +37,7 @@ private slots:
     void on_actionBlur_triggered();
     void on_actionNoir_triggered();
 
+    void on_actionBatch_Test_triggered();
 private:
     Ui::MainWindow *ui;
     ImageEditor *userImage;

@@ -9,12 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     userImage = new ImageEditor(this);
-
-    // Connect the button click to the ImageEditor slot
+  // Connect the button click to the ImageEditor slot
   //  connect(ui->displayButton, SIGNAL(clicked()), userImage, SLOT(addImage()));
-
-    // Connect the updateDisplay signal to a slot that updates the displayed image
-    connect(userImage, SIGNAL(updateDisplay(QImage)), this, SLOT(updateDisplayedImage(QImage)));
 }
 
 MainWindow::~MainWindow()
@@ -22,24 +18,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::updateDisplayedImage(const QImage& newImage)
+void MainWindow::updateDisplayedImage()
 {
     // Update the QLabel or any other widget that displays the image
-    ui->displayLabel->setPixmap(QPixmap::fromImage(newImage));
+    ui->displayLabel->setPixmap(QPixmap::fromImage(userImage->image));
     ui->displayLabel->setScaledContents(false);
 }
-
-void MainWindow::on_displayButton_clicked()
-{
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-
-                                                    "/home",
-
-                                                    tr("Images (*.jpg *.gif *.png *.bnp *.tif )"));
-    ;
-    userImage->loadImage(fileName);
-}
-
 
 void MainWindow::on_actionImport_Image_triggered()
 {
@@ -50,35 +34,39 @@ void MainWindow::on_actionImport_Image_triggered()
                                                     tr("Images (*.jpg *.gif *.png *.bnp *.tif )"));
     ;
     userImage->loadImage(fileName);
+    updateDisplayedImage();
 }
 
 
 void MainWindow::on_actionUndo_triggered()
 {
     userImage->undo();
+    updateDisplayedImage();
 }
 
 
 void MainWindow::on_actionRedo_triggered()
 {
     userImage->redo();
+    updateDisplayedImage();
 }
 
 void MainWindow::on_actionNoir_triggered()
 {
     userImage->filterNoir();
+    updateDisplayedImage();
 }
 
 void MainWindow::on_actionSepia_triggered()
 {
-
     userImage->filterSepia();
-
+    updateDisplayedImage();
 }
 
 void MainWindow::on_actionBlur_triggered()
 {
     userImage->filterBlur();
+    updateDisplayedImage();
 }
 
 void MainWindow::imgSaveToFile(QString type, QString imgDir, QString name){
@@ -127,10 +115,30 @@ void MainWindow::on_actionSave_Image_triggered()
 void MainWindow::on_rotateL_triggered()
 {
     userImage->rotateCounter();
+    updateDisplayedImage();
 }
 void MainWindow::on_rotateR_triggered()
 {
     userImage->rotateClockwise();
+    updateDisplayedImage();
+}
+
+void MainWindow::on_actionBatch_Test_triggered() // add button
+{ // expirimenting with how to first manage miultiple files
+
+    QStringList files = QFileDialog::getOpenFileNames(
+        this,
+        "Select one or more files to open",
+        "/home",
+        "Images (*.jpg *.gif *.png *.bnp *.tif )");
+
+    for (int i = 0; i < files.size(); i++) {
+        userImage->loadImage(files[i]); // assign QImage with file directory
+
+        userImage->filterNoir(); // temp edit test
+
+        userImage->image.save(files[i]); // save image to file location
+    }
 }
 
 

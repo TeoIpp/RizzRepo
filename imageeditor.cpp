@@ -12,8 +12,6 @@ void ImageEditor::loadImage(QString fileName) {
     QImage tempImage(filePath);
 
     image = tempImage;
-
-    emit updateDisplay(image); // updates image viewer
 }
 
 void ImageEditor::filterNoir(){
@@ -22,7 +20,6 @@ void ImageEditor::filterNoir(){
     QImage noir = image.convertToFormat(QImage::Format_Grayscale8);
     editHist.push(image);
     image = noir;
-    emit updateDisplay(image);
 }
 
 void ImageEditor::undo(){
@@ -30,7 +27,6 @@ void ImageEditor::undo(){
     if (editHist.isEmpty()==false){
         undoHist.push(image);
         image = editHist.top();
-        emit updateDisplay(editHist.pop());
     }
     else
     {
@@ -43,7 +39,7 @@ void ImageEditor::redo(){
     if (undoHist.isEmpty()==false){
         editHist.push(image);
         image = undoHist.top();
-        emit updateDisplay(undoHist.pop());
+        undoHist.pop();
     }
     else
     {
@@ -59,8 +55,6 @@ void ImageEditor::rotateClockwise() {
     QImage rotate = image.transformed(QTransform().rotate(90));
     editHist.push(image);
     image = rotate;
-
-    emit updateDisplay(image);
 }
 
 void ImageEditor::rotateCounter() {
@@ -68,8 +62,6 @@ void ImageEditor::rotateCounter() {
     QImage rotate = image.transformed(QTransform().rotate(270));
     editHist.push(image);
     image = rotate;
-
-    emit updateDisplay(image);
 }
 
 void ImageEditor::filterSepia()
@@ -92,9 +84,6 @@ void ImageEditor::filterSepia()
 
         }
     }
-    emit updateDisplay(image);
-
-
 }
 void ImageEditor::filterBlur()
 {
@@ -122,11 +111,7 @@ void ImageEditor::filterBlur()
           image.setPixel(x, y, qRgb(totalR / count, totalG / count, totalB / count));
         }
     }
-
-    emit updateDisplay(image);
 }
-
-
 
 
 

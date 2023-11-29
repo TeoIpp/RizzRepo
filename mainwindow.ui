@@ -34,7 +34,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuTools">
@@ -43,6 +43,7 @@
     </property>
     <addaction name="actionImport_Image"/>
     <addaction name="actionSave_Image"/>
+    <addaction name="actionBatch_Test"/>
    </widget>
    <widget class="QMenu" name="menuTools_2">
     <property name="title">
@@ -162,6 +163,11 @@
   <action name="actionSave_Image_2">
    <property name="text">
     <string>Save</string>
+   </property>
+  </action>
+  <action name="actionBatch_Test">
+   <property name="text">
+    <string>Batch Test</string>
    </property>
   </action>
  </widget>
