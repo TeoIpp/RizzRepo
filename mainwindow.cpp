@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "imageeditor.h"
+#include "batchedit.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,7 +32,7 @@ void MainWindow::on_actionImport_Image_triggered()
 
                                                     "/home",
 
-                                                    tr("Images (*.jpg *.gif *.png *.bnp *.tif )"));
+                                                    tr("Images (*.jpg *.gif *.png *.bmp *.tif )"));
     ;
     userImage->loadImage(fileName);
     updateDisplayedImage();
@@ -124,21 +125,12 @@ void MainWindow::on_rotateR_triggered()
 }
 
 void MainWindow::on_actionBatch_Test_triggered() // add button
-{ // expirimenting with how to first manage miultiple files
-
-    QStringList files = QFileDialog::getOpenFileNames(
-        this,
-        "Select one or more files to open",
-        "/home",
-        "Images (*.jpg *.gif *.png *.bnp *.tif )");
-
-    for (int i = 0; i < files.size(); i++) {
-        userImage->loadImage(files[i]); // assign QImage with file directory
-
-        userImage->filterNoir(); // temp edit test
-
-        userImage->image.save(files[i]); // save image to file location
-    }
+{
+    // set ui instance
+    batchedit edit;
+    // create/display instance
+    edit.setModal(true);
+    edit.exec();
 }
 
 
