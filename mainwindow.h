@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QScreen>
 #include "imageeditor.h"
 
 QT_BEGIN_NAMESPACE
