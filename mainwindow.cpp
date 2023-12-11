@@ -22,8 +22,27 @@ MainWindow::~MainWindow()
 void MainWindow::updateDisplayedImage()
 {
     // Update the QLabel or any other widget that displays the image
-    ui->displayLabel->setPixmap(QPixmap::fromImage(userImage->image));
-    ui->displayLabel->setScaledContents(false);
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect screenGeometry = screen->availableGeometry();
+    QPixmap pixMap = QPixmap::fromImage(userImage->image);
+    int width = pixMap.width();
+    int height = pixMap.height();
+    float ratio = float(width) / float(height);
+    if(height > screenGeometry.height() - 100)
+    {
+        height = screenGeometry.height() - 100;
+        width = int(height * ratio);
+    }
+    else if(width > screenGeometry.width() - 100)
+    {
+        width = screenGeometry.width() - 100;
+        height = int(width / ratio);
+    }
+
+    ui->displayLabel->setPixmap(pixMap);
+    ui->displayLabel->setMinimumSize(width, height);
+    ui->displayLabel->setMaximumSize(width, height);
+    ui->displayLabel->setScaledContents(true);
 }
 
 void MainWindow::on_actionImport_Image_triggered()
