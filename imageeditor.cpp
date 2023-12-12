@@ -30,22 +30,22 @@ void ImageEditor::filterNoir(){
 
 void ImageEditor::undo(){
 
-        if (editHist.isEmpty()==false){
+        if (editHist[displayedImage].isEmpty()==false){
             for (int i = 0; i < imgSize; i++) {
                 undoHist[i].push(image[i]);
                 image[i] = editHist[i].top();
+                editHist[i].pop();
             }
         }
         else
         {
             QMessageBox::information(nullptr, tr("No Undo Actions"), tr("There are no more actions to undo."));
-        }
-
+        }        
 }
 
 void ImageEditor::redo(){
 
-        if (undoHist.isEmpty()==false){
+        if (undoHist[displayedImage].isEmpty()==false){
             for (int i = 0; i < imgSize; i++) {
             editHist[i].push(image[i]);
             image[i] = undoHist[i].top();
