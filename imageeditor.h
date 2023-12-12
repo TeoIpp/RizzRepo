@@ -18,18 +18,16 @@
 
 #include <QMessageBox>
 
-
-// TESTING if SSH key will push -Michael
-// Pushing
-
 class ImageEditor : public QObject {
     Q_OBJECT
 
 public:
     explicit ImageEditor(QObject *parent = nullptr);
-    QImage image;
+    QList<QImage> image;
+    int imgSize;
+    int displayedImage = 0;
 public slots:
-    void loadImage(QString fileName);
+    void loadImage(QStringList fileName);
     void filterNoir();
     void rotateClockwise();
     void rotateCounter();
@@ -37,14 +35,11 @@ public slots:
     void redo();
     void filterSepia();
     void filterBlur();
-
-
     // add functions here , also add button in mainwindow.h
-//signals
-    //void updateDisplay(const QImage& newImage);
+
 private:
-    QStack<QImage> editHist;
-    QStack<QImage> undoHist;
+    QList<QStack<QImage>> editHist;
+    QList<QStack<QImage>> undoHist;
     QString filePath;
 };
 

@@ -38,7 +38,9 @@ private slots:
     void on_actionBlur_triggered();
     void on_actionNoir_triggered();
 
-    void on_actionBatch_Test_triggered();
+    void on_imgL_clicked();
+    void on_imgR_clicked();
+
 private:
     Ui::MainWindow *ui;
     ImageEditor *userImage;

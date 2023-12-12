@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "imageeditor.h"
-#include "batchedit.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -9,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    userImage = new ImageEditor(this);
+    //userImage = new ImageEditor(this);
   // Connect the button click to the ImageEditor slot
   //  connect(ui->displayButton, SIGNAL(clicked()), userImage, SLOT(addImage()));
 }
@@ -24,7 +23,7 @@ void MainWindow::updateDisplayedImage()
     // Update the QLabel or any other widget that displays the image
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect screenGeometry = screen->availableGeometry();
-    QPixmap pixMap = QPixmap::fromImage(userImage->image);
+    QPixmap pixMap = QPixmap::fromImage(userImage->image[userImage->displayedImage]);
     int width = pixMap.width();
     int height = pixMap.height();
     float ratio = float(width) / float(height);
@@ -47,12 +46,12 @@ void MainWindow::updateDisplayedImage()
 
 void MainWindow::on_actionImport_Image_triggered()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+    userImage = new ImageEditor(this);
+    QStringList fileName = QFileDialog::getOpenFileNames(this, tr("Open File"),
 
                                                     "/home",
 
                                                     tr("Images (*.jpg *.gif *.png *.bmp *.tif )"));
-    ;
     userImage->loadImage(fileName);
     updateDisplayedImage();
 }
@@ -90,16 +89,12 @@ void MainWindow::on_actionBlur_triggered()
 }
 
 void MainWindow::imgSaveToFile(QString type, QString imgDir, QString name){
-
-    QPixmap image = ui->displayLabel->pixmap();
-    if (image.save(imgDir+"\\"+name+type))
-    {
-        QMessageBox::information(this, tr("Success"), tr("Image saved successfully."));
+    for (int i = 0; i < userImage->imgSize; i++) {
+        if (!userImage->image[i].save(imgDir+"\\"+name+QString::number(i)+type)) {
+            QMessageBox::warning(this, tr("Error"), tr("Failed to save image."));
+        }
     }
-    else
-    {
-        QMessageBox::warning(this, tr("Error"), tr("Failed to save image."));
-    }
+    QMessageBox::information(this, tr("Success"), tr("Image saved successfully."));
 }
 void MainWindow::on_actionSave_Image_triggered()
 {
@@ -143,15 +138,23 @@ void MainWindow::on_rotateR_triggered()
     updateDisplayedImage();
 }
 
-void MainWindow::on_actionBatch_Test_triggered() // add button
+void MainWindow::on_imgL_clicked()
 {
-    // set ui instance
-    batchedit edit;
-    // create/display instance
-    edit.setModal(true);
-    edit.exec();
+    if (userImage->displayedImage == 0) {
+        userImage->displayedImage = (userImage->imgSize)-1;
+    } else {
+        userImage->displayedImage -= 1;
+    }
+    updateDisplayedImage();
 }
 
-
-
+void MainWindow::on_imgR_clicked()
+{
+    if (userImage->displayedImage == (userImage->imgSize)-1) {
+        userImage->displayedImage = 0;
+    } else {
+        userImage->displayedImage += 1;
+    }
+    updateDisplayedImage();
+}
 
