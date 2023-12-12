@@ -41,6 +41,8 @@ private slots:
     void on_imgL_clicked();
     void on_imgR_clicked();
 
+    void on_actionCrop_triggered();
+
 private:
     Ui::MainWindow *ui;
     ImageEditor *userImage;

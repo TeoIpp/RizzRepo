@@ -36,6 +36,7 @@ public slots:
     void redo();
     void filterSepia();
     void filterBlur();
+    void crop(int x, int y, int w, int h);
     // add functions here , also add button in mainwindow.h
 
 private:

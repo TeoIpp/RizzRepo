@@ -158,3 +158,14 @@ void MainWindow::on_imgR_clicked()
     updateDisplayedImage();
 }
 
+void MainWindow::on_actionCrop_triggered()
+{
+    int x = 0;
+    int y = 0;
+    int w = 500;
+    int h = 750;
+
+    userImage->crop(x, y, w, h);
+    updateDisplayedImage();
+}
+

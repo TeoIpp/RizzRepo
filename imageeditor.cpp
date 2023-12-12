@@ -126,4 +126,11 @@ void ImageEditor::filterBlur()
     }
 }
 
+void ImageEditor::crop(int x, int y, int w, int h) {
+    for (int i = 0; i < imgSize; i++) {
+        editHist[i].push(image[i]);
+        image[i] = image[i].copy(x, y, w, h);
+    }
+}
+
 
