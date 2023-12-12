@@ -7,7 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    ui->imgL->setVisible(false);
+    ui->imgR->setVisible(false);
     //userImage = new ImageEditor(this);
   // Connect the button click to the ImageEditor slot
   //  connect(ui->displayButton, SIGNAL(clicked()), userImage, SLOT(addImage()));
@@ -53,6 +54,13 @@ void MainWindow::on_actionImport_Image_triggered()
 
                                                     tr("Images (*.jpg *.gif *.png *.bmp *.tif )"));
     userImage->loadImage(fileName);
+    if (fileName.size() > 1) {
+        ui->imgL->setVisible(true);
+        ui->imgR->setVisible(true);
+    } else {
+        ui->imgL->setVisible(false);
+        ui->imgR->setVisible(false);
+    }
     updateDisplayedImage();
 }
 
