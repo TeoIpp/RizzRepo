@@ -1,3 +1,4 @@
+//hello
 #ifndef IMAGEEDITOR_H
 #define IMAGEEDITOR_H
 
