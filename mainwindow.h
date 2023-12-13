@@ -45,6 +45,8 @@ private slots:
 //ADDED THIS FOR SLIDER
     void on_verticalSlider_sliderReleased();
 
+    void on_horizontalSlider_sliderReleased();
+
 private:
     Ui::MainWindow *ui;
     ImageEditor *userImage;

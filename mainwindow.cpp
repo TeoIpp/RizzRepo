@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->imgR->setVisible(false);
 
     ui->verticalSlider->setVisible(false);
+    ui->horizontalSlider->setVisible(false);
     //userImage = new ImageEditor(this);
   // Connect the button click to the ImageEditor slot
   //  connect(ui->displayButton, SIGNAL(clicked()), userImage, SLOT(addImage()));
@@ -64,6 +65,7 @@ void MainWindow::on_actionImport_Image_triggered()
         ui->imgR->setVisible(false);
     }
     ui->verticalSlider->setVisible(true);
+    ui->horizontalSlider->setVisible(true);
     updateDisplayedImage();
 }
 
@@ -189,3 +191,13 @@ void MainWindow::on_verticalSlider_sliderReleased()
     userImage->setBrightness(brightnessValue);
     updateDisplayedImage();
 }
+
+void MainWindow::on_horizontalSlider_sliderReleased()
+{
+    int sliderValue = ui->horizontalSlider->value();
+    qreal saturation = static_cast<qreal>(sliderValue) / 100.0;
+
+    userImage->setSaturation(saturation);
+    updateDisplayedImage();
+}
+

@@ -157,6 +157,39 @@ void ImageEditor::setBrightness(qreal value) {
     }
 }
 
+void ImageEditor::setSaturation(qreal value) {
+    qreal saturation = value;
+
+    for (int i = 0; i < imgSize; i++) {
+        QImage adjusted = originalImage[i];
+        adjusted = adjusted.convertToFormat(QImage::Format_ARGB32);
+
+        for (int y = 0; y < adjusted.height(); ++y) {
+            for (int x = 0; x < adjusted.width(); ++x) {
+              QRgb pixel = adjusted.pixel(x, y);
+              int alpha = qAlpha(pixel);
+              int red = qRed(pixel);
+              int green = qGreen(pixel);
+              int blue = qBlue(pixel);
+
+              float h, s, v;
+              QColor::fromRgb(red, green, blue).getHsvF(&h, &s, &v);
+
+              s *= saturation;
+              s = qBound(0.0, s, 1.0);
+
+              QColor newColor = QColor::fromHsvF(h, s, v);
+              adjusted.setPixel(x, y, qRgba(newColor.red(), newColor.green(), newColor.blue(), alpha));
+            }
+        }
+
+        image[i] = adjusted;
+        editHist[i].push(adjusted);
+    }
+}
+
+
+
 void ImageEditor::crop(int x, int y, int w, int h) {
     for (int i = 0; i < imgSize; i++) {
         editHist[i].push(image[i]);

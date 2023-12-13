@@ -41,6 +41,7 @@ public slots:
     void crop(int x, int y, int w, int h);
     //ADDED THIS FOR BRIGHTNESS
     void setBrightness(qreal value);
+    void setSaturation(qreal value);
     // add functions here , also add button in mainwindow.h
 
 private:
@@ -48,6 +49,7 @@ private:
     QList<QStack<QImage>> undoHist;
     QString filePath;
     qreal brightness;
+    qreal saturation;
 };
 
 
