@@ -25,6 +25,8 @@ class ImageEditor : public QObject {
 public:
     explicit ImageEditor(QObject *parent = nullptr);
     QList<QImage> image;
+    QList<QImage> originalImage;
+    bool originalLoaded;
     int imgSize;
     int displayedImage = 0;
 public slots:
@@ -45,6 +47,7 @@ private:
     QList<QStack<QImage>> editHist;
     QList<QStack<QImage>> undoHist;
     QString filePath;
+    qreal brightness;
 };
 
 

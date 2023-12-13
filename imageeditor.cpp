@@ -2,6 +2,7 @@
 
 ImageEditor::ImageEditor(QObject *parent) : QObject(parent) {
     // constructor if needed
+    originalLoaded = false;
 }
 
 void ImageEditor::loadImage(QStringList files) {
@@ -16,6 +17,11 @@ void ImageEditor::loadImage(QStringList files) {
         image.push_back(tempImage);
         editHist.push_back(tempEditHist);
         undoHist.push_back(tempUndoHist);
+    }
+
+    if (!originalLoaded) {
+        originalImage = image;
+        originalLoaded = true;
     }
 }
 
@@ -128,10 +134,10 @@ void ImageEditor::filterBlur()
 
 //ADDED THIS FOR BRIGHTNESS
 void ImageEditor::setBrightness(qreal value) {
-    brightness = 1.0 - value;
+    brightness = value;
 
     for (int i = 0; i < imgSize; i++) {
-        QImage adjusted = image[i];
+        QImage adjusted = originalImage[i];
         adjusted = adjusted.convertToFormat(QImage::Format_ARGB32);
 
         for (int y = 0; y < adjusted.height(); ++y) {
