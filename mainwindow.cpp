@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->imgL->setVisible(false);
     ui->imgR->setVisible(false);
+
+    ui->verticalSlider->setVisible(false);
     //userImage = new ImageEditor(this);
   // Connect the button click to the ImageEditor slot
   //  connect(ui->displayButton, SIGNAL(clicked()), userImage, SLOT(addImage()));
@@ -61,6 +63,7 @@ void MainWindow::on_actionImport_Image_triggered()
         ui->imgL->setVisible(false);
         ui->imgR->setVisible(false);
     }
+    ui->verticalSlider->setVisible(true);
     updateDisplayedImage();
 }
 
