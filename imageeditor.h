@@ -37,6 +37,8 @@ public slots:
     void filterSepia();
     void filterBlur();
     void crop(int x, int y, int w, int h);
+    //ADDED THIS FOR BRIGHTNESS
+    void setBrightness(qreal value);
     // add functions here , also add button in mainwindow.h
 
 private:

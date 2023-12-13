@@ -177,3 +177,12 @@ void MainWindow::on_actionCrop_triggered()
     updateDisplayedImage();
 }
 
+//ADDED THIS FOR SLIDER
+void MainWindow::on_verticalSlider_sliderReleased()
+{
+    int sliderValue = ui->verticalSlider->value();
+    qreal brightnessValue = static_cast<qreal>(sliderValue) / 100.0;
+
+    userImage->setBrightness(brightnessValue);
+    updateDisplayedImage();
+}

@@ -42,6 +42,8 @@ private slots:
     void on_imgR_clicked();
 
     void on_actionCrop_triggered();
+//ADDED THIS FOR SLIDER
+    void on_verticalSlider_sliderReleased();
 
 private:
     Ui::MainWindow *ui;

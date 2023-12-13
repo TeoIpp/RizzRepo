@@ -126,6 +126,31 @@ void ImageEditor::filterBlur()
     }
 }
 
+//ADDED THIS FOR BRIGHTNESS
+void ImageEditor::setBrightness(qreal value) {
+    brightness = 1.0 - value;
+
+    for (int i = 0; i < imgSize; i++) {
+        QImage adjusted = image[i];
+        adjusted = adjusted.convertToFormat(QImage::Format_ARGB32);
+
+        for (int y = 0; y < adjusted.height(); ++y) {
+            for (int x = 0; x < adjusted.width(); ++x) {
+              QRgb pixel = adjusted.pixel(x, y);
+              int alpha = qAlpha(pixel);
+              int red = qRed(pixel) * brightness;
+              int green = qGreen(pixel) * brightness;
+              int blue = qBlue(pixel) * brightness;
+
+              adjusted.setPixel(x, y, qRgba(red, green, blue, alpha));
+            }
+        }
+
+        image[i] = adjusted;
+        editHist[i].push(adjusted);
+    }
+}
+
 void ImageEditor::crop(int x, int y, int w, int h) {
     for (int i = 0; i < imgSize; i++) {
         editHist[i].push(image[i]);
